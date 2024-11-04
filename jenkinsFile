@@ -1,0 +1,26 @@
+pipeline {
+    agent any // Use any available agent
+        
+        stage('Build') {
+            steps {
+                // Run the build command (e.g., Maven, Gradle, etc.)
+                echo 'Building.....' // Replace with your specific build command
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                echo 'Testing... '
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build and basic scan completed successfully!'
+        }
+        failure {
+            echo 'Build or scan failed.'
+        }
+    }
+}
