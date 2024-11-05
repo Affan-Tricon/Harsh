@@ -1,26 +1,37 @@
 pipeline {
-    agent any // Use any available agent
-        
-        stage('Build') {
+    agent any
+ 
+    environment {
+        // Define Python version if using a specific one
+        PYTHON_VERSION = 'python3'
+    }
+ 
+    stages {
+        stage('Clone Repository') {
             steps {
-                // Run the build command (e.g., Maven, Gradle, etc.)
-                echo 'Building.....' // Replace with your specific build command
+                // Clone the repository
+                git url: 'https://github.com/bhaskar-prasad/Demo', branch: 'main'
             }
         }
-        
-        stage('Test') {
+ 
+ 
+        stage('Deploy') {
             steps {
-                echo 'Testing... '
+                // Dummy deploy step (replace with actual deployment commands)
+                echo 'Deploying the application...'
             }
         }
     }
-
+ 
     post {
+        always {
+            echo 'Cleaning up...'
+        }
         success {
-            echo 'Build and basic scan completed successfully!'
+            echo 'Build succeeded!'
         }
         failure {
-            echo 'Build or scan failed.'
+            echo 'Build failed. Please check the errors.'
         }
     }
 }
